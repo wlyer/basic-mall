@@ -4,15 +4,68 @@
  * @Description: 登录
 */
 <template>
-  <section class="login">
+  <section class="login dColumn">
     <img class="logo" src="../assets/images/logo.png"/>
-
+    <div class="form-box">
+      <van-cell-group class="form">
+        <van-field
+          v-model="loginForm.userCode"
+          placeholder="请输入账号"
+          class="mb10 bb"
+          :error-message="errorMsg.userCode">
+          <i class="iconfont" slot="label">&#xe633;</i>
+        </van-field>
+        <van-field
+          v-model="loginForm.dlwPsw"
+          type="password"
+          class="bb"
+          placeholder="请输入密码"
+          :error-message="errorMsg.dlwPsw">
+          <i class="iconfont" slot="label">&#xe7ba;</i>
+        </van-field>
+      </van-cell-group>
+      <van-button class="operation-btn" type="danger" @click="doLogin">登录</van-button>
+    </div>
   </section>
 </template>
 
 <script>
+  import { Cell, CellGroup, Field, Icon, Button } from 'vant';
   export default {
-    name: 'login'
+    name: 'login',
+    components: {
+      [Field.name]: Field,
+      [Button.name]: Button,
+      [Icon.name]: Icon,
+      [Cell.name]: Cell,
+      [CellGroup.name]: CellGroup
+    },
+    data () {
+      return {
+        loginForm: {
+          userCode: '',
+          dlwPsw: '',
+          isFront: 1
+        },
+        errorMsg: {
+          userCode: '',
+          dlwPsw: ''
+        }
+      };
+    },
+    mounted () {
+    },
+    methods: {
+      // 登录
+      doLogin () {
+      },
+      // 立即注册
+      toRegist () {
+      },
+      // 忘记密码
+      toForget () {
+      }
+    }
   };
 </script>
 
@@ -27,6 +80,14 @@
   .logo{
     width:100px;
     height: 100px;
+    margin-bottom: 30px;
+  }
+  .form-box{
+    text-align: center;
+    width: 80%;
+    .form{
+      margin-bottom: 30px;
+    }
   }
 }
 </style>
