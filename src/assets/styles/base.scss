@@ -35,6 +35,29 @@
   -ms-flex: 3;
   flex: 3;
 }
+.fl{
+  float: left;
+}
+.rl{
+  float: right;
+}
+.clearfix:after{
+  visibility:hidden;
+  clear:both;
+  display:block;
+  content:".";
+  height:0
+}
+.clearfix{/*ie6/ie7*/
+  *zoom:1;
+}
+a,.links{
+  color:$my-link-color;
+  text-decoration:none
+}
+a:hover,.links:hover{
+  color:$my-theme-color;
+}
 .mb10{
   margin-bottom: 10px;
 }
