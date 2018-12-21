@@ -7,7 +7,7 @@ let routers = [
   {
     path: '/',
     name: '',
-    redirect: '/login'
+    redirect: '/home'
   },
   {
     path: '/home',

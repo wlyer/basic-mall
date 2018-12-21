@@ -4,6 +4,7 @@ import 'babel-polyfill';
 import Vue from 'vue';
 import App from './App';
 import Vuex from 'vuex';
+/* import 'lib-flexible'; */
 import store from './store/index';
 import VueRouter from 'vue-router'; // 引入vue-router
 import routes from '@/router';
@@ -12,10 +13,18 @@ import toast from '@/utils/toast';
 import utils from '@/utils/utils';
 import '@/assets/styles/base_core.scss';
 import VeeValidate from 'vee-validate';
-Vue.use(VeeValidate);
+import VideoPlayer from 'vue-video-player';
+// 第一个是videoJs的样式，后一个是vue-video-player的样式，因为考虑到我其他业务组件可能也会用到视频播放，所以就放在了main.js内
+import 'video.js/dist/video-js.css';
+import 'vue-video-player/src/custom-theme.css';
+import '@/assets/styles/video.css';
+import hls from 'videojs-contrib-hls';
 Vue.config.productionTip = false;
 Vue.use(Vuex);
 Vue.use(VueRouter);
+Vue.use(VideoPlayer);
+Vue.use(hls);
+Vue.use(VeeValidate);
 Vue.prototype.$urls = urls;
 Vue.prototype.$user = '';
 Vue.prototype.$utils = utils;

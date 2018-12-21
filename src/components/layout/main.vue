@@ -4,12 +4,16 @@
  * @Description: 主结构
 */
 <template>
-  <section class="main"></section>
+  <section class="main">
+    <transition name="fade" mode="out-in">
+      <router-view/>
+    </transition>
+  </section>
 </template>
 
 <script>
   export default {
-    name: 'main'
+    name: 'my-main'
   };
 </script>
 
