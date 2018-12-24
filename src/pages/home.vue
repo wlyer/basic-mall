@@ -5,7 +5,7 @@
 */
 <template>
   <section class="home">
-    <van-swipe class="banner" @change="onChange">
+    <van-swipe class="banner mb10" @change="onChange">
       <van-swipe-item v-for="(file, index) in banner" :key="index">
         <img v-if="file.type == 'image'" :src="file.url" />
         <video-player v-else class="video-player vjs-custom-skin"
@@ -18,6 +18,24 @@
         </video-player>
       </van-swipe-item>
     </van-swipe>
+    <div class="type dbox">
+      <div class="flex1" @click="toHot">
+        <img src="../assets/images/icon/icon_1.png"/>
+        <div>热销</div>
+      </div>
+      <div class="flex1" @click="toNew">
+        <img src="../assets/images/icon/icon_5.png"/>
+        <div>新品</div>
+      </div>
+      <div class="flex1" @click="toCheap">
+        <img src="../assets/images/icon/icon_6.png"/>
+        <div>折扣</div>
+      </div>
+      <div class="flex1" @click="toType">
+        <img src="../assets/images/icon/icon_7.png"/>
+        <div>分类</div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -56,7 +74,7 @@
             src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' // 你的视频地址（必填）
             // http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4
           }],
-          poster: 'poster.jpg', // 你的封面地址
+          poster: '../../static/images/banner/banner_5.jpg', // 你的封面地址
           width: document.documentElement.clientWidth,
           notSupportedMessage: '当前视频暂时无法播放' // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
 //        controlBar: {
@@ -72,18 +90,25 @@
       onPlayerPlay(player) {
       },
       onPlayerPause(player) {
-        debugger;
       },
       onChange(index) {
         /* if (index === 1 || index === 6) {
           // eslint-disable-next-line
           this.$refs.videoPlayer.pause;
         } */
+      },
+      toHot () {
+      },
+      toNew () {
+      },
+      toCheap () {
+      },
+      toType () {
       }
     },
     computed: {
       player() {
-        return this.$refs.videoPlayer[0].player;
+        return this.$refs.videoPlayer.player;
       }
     }
   };

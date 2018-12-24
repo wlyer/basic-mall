@@ -10,7 +10,13 @@
       :left-text="isParentRouter() ? '' : '返回'"
       :left-arrow="!isParentRouter()"
       @click-left="onClickLeft"
-    />
+    >
+      <div slot="right">
+        <slot>
+          <van-icon name="search" @click="onClickRight"/>
+        </slot>
+      </div>
+    </van-nav-bar>
   </section>
 </template>
 
@@ -40,6 +46,15 @@
       },
       onClickLeft() {
         this.$router.go(-1);
+        /* if (this.$route.name === '检索') {
+          let path = this.$route.matched[this.$route.matched.length - 2].path;
+          this.$router.replace(path);
+        } else {
+          this.$router.go(-1);
+        } */
+      },
+      onClickRight() {
+        this.$router.push('/search');
       }
     }
   };

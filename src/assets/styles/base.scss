@@ -71,3 +71,18 @@ a:hover,.links:hover{
   width: 100%;
   display: block;
 }
+/*底部菜单颜色*/
+.van-tabbar-item--active{
+  color: $my-theme-color !important;
+}
+/*复选框颜色*/
+.van-checkbox__icon--checked .van-icon{
+  border-color: $my-theme-color !important;
+  background-color: $my-theme-color !important;
+}
+.header .van-nav-bar__left {
+  left: 10px;
+}
+.header .van-nav-bar__text, .header .van-nav-bar .van-icon {
+  color: $my-text-color;
+}
