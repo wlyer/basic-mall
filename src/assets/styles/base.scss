@@ -58,6 +58,9 @@ a,.links{
 a:hover,.links:hover{
   color:$my-theme-color;
 }
+.p10{
+  padding: 10px;
+}
 .mb10{
   margin-bottom: 10px;
 }
@@ -85,4 +88,30 @@ a:hover,.links:hover{
 }
 .header .van-nav-bar__text, .header .van-nav-bar .van-icon {
   color: $my-text-color;
+}
+.ly-card-radius{
+  background-color: #FFFFFF;
+  margin: 10px;
+  border-radius: 5px;
+}
+.ly-card-radius-p10{
+  background-color: #FFFFFF;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.ly-card{
+  background-color: #FFFFFF;
+  margin-bottom: 10px;
+}
+.ly-card-p10{
+  background-color: #FFFFFF;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.no-more{
+  height:40px;
+  line-height: 40px;
+  text-align: center;
+  color: #ccc;
 }

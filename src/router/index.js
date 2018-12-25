@@ -6,7 +6,14 @@ const Home = resolve => require(['@/pages/home.vue'], resolve);// 主页
 
 const MyInfo = resolve => require(['@/pages/myInfo/myInfo.vue'], resolve);// 个人中心
 
+/* 商城 */
 const ShopCart = resolve => require(['@/pages/mall/shopCart/shopCart.vue'], resolve);// 购物车
+const CommodityDetail = resolve => require(['@/pages/mall/commodity/commodityDetail.vue'], resolve);// 商品详情
+const CommoditySearch = resolve => require(['@/pages/mall/commodity/commoditySearch.vue'], resolve);// 商品检索
+const ShopOrder = resolve => require(['@/pages/mall/shopOrder/shopOrder.vue'], resolve);// 提交订单
+const PaySuccess = resolve => require(['@/pages/mall/pay/paySuccess.vue'], resolve);// 支付成功
+const PayError = resolve => require(['@/pages/mall/pay/payError.vue'], resolve);// 支付失败
+const PayWechat = resolve => require(['@/pages/mall/pay/wechat.vue'], resolve);// 微信回调页面
 let routers = [
   {
     path: '/',
@@ -37,10 +44,22 @@ let routers = [
     component: ForgetPassword
   },
   {
-    path: '/shopCart',
+    path: '/mall',
     component: Main,
     children: [
-      { path: '', component: ShopCart, name: '购物车' }
+      { path: 'commodityDetail', component: CommodityDetail, name: '商品详情' },
+      { path: 'commoditySearch', component: CommoditySearch, name: '商品检索' },
+      { path: 'addOrder', component: ShopOrder, name: '提交订单' },
+      { path: 'shopCart', component: ShopCart, name: '购物车' }
+    ]
+  },
+  {
+    path: '/pay',
+    component: Main,
+    children: [
+      { path: 'paySuccess', component: PaySuccess, name: '支付成功' },
+      { path: 'payError', component: PayError, name: '支付失败' },
+      { path: 'payWechat', component: PayWechat, name: '微信回调' }
     ]
   },
   {

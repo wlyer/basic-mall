@@ -9,7 +9,7 @@
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>
-    <v-menu :menuActive="menuActive" v-if="isParentRouter()"/>{{isParentRouter()}}
+    <v-menu :menuActive="menuActive" v-if="isParentRouter()"/>
   </section>
 </template>
 

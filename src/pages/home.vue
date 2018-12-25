@@ -5,7 +5,7 @@
 */
 <template>
   <section class="home">
-    <van-swipe class="banner mb10" @change="onChange">
+    <van-swipe class="banner" @change="onChange">
       <van-swipe-item v-for="(file, index) in banner" :key="index">
         <img v-if="file.type == 'image'" :src="file.url" />
         <video-player v-else class="video-player vjs-custom-skin"
@@ -18,7 +18,7 @@
         </video-player>
       </van-swipe-item>
     </van-swipe>
-    <div class="type dbox">
+    <div class="type dbox ly-card-p10">
       <div class="flex1" @click="toHot">
         <img src="../assets/images/icon/icon_1.png"/>
         <div>热销</div>
@@ -36,18 +36,46 @@
         <div>分类</div>
       </div>
     </div>
+    <div class="commodity-type-list">
+      <van-tabs v-model="activeType" animated @click="changeType">
+        <van-tab v-for="index in 2" :title="'分类' + index" :key="index">
+        </van-tab>
+      </van-tabs>
+    </div>
+    <div class="list-content" id="list-content">
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :offset="100"
+        @load="onLoad"
+      >
+        <van-row class="commodity-list">
+          <van-col span="12" class="commodity-item" v-for="(item,index) in commodityList" :key="index" >
+            <v-card :data="item"/>
+          </van-col>
+        </van-row>
+      </van-list>
+      <div class="no-more" v-if="commodityList.length===0  || finished">没有更多数据哦~</div>
+    </div>
   </section>
 </template>
 
 <script>
   import { videoPlayer } from 'vue-video-player';
-  import { Swipe, SwipeItem } from 'vant';
+  import { Swipe, SwipeItem, Tab, Tabs, List, Row, Col } from 'vant';
+  import Card from '@/components/card';
   export default {
     name: 'home',
     components: {
       [Swipe.name]: Swipe,
       [SwipeItem.name]: SwipeItem,
-      videoPlayer
+      [Tab.name]: Tab,
+      [Tabs.name]: Tabs,
+      [List.name]: List,
+      [Row.name]: Row,
+      [Col.name]: Col,
+      videoPlayer,
+      'v-card': Card
     },
     data() {
       return {
@@ -83,10 +111,63 @@
 //          remainingTimeDisplay: false,
 //          fullscreenToggle: true  //全屏按钮
 //        }
-        }
+        },
+        activeType: 0,
+        commodityList: [],
+        total: 0,
+        page: 1,
+        loading: false,
+        finished: false
       };
     },
+    mounted () {
+      let winHeight = document.documentElement.clientHeight; // 视口大小
+      document.getElementById('list-content').style.height = (winHeight - 46 * 2 - 250) + 'px'; // 调整上拉加载框高度
+    },
     methods: {
+      resetParams () {
+        this.commodityList = [];
+        this.page = 1;
+        this.total = 0;
+        this.finished = false;
+      },
+      // 切换分类
+      changeType () {
+        this.resetParams();
+      },
+      getCommodities () {
+        const _this = this;
+        let params = {
+          page: this.page,
+          pageSize: 20,
+          name: '',
+          type: this.activeType,
+          isVip: -1,
+          status: 1,
+          deleted: 0
+        };
+        this.$store.dispatch('getCommodities', params).then((data) => {
+          if (data.result) {
+            _this.totalPage = data.map.totalPage;
+            _this.loading = false;
+            if (data.map.pageNum === 1) {
+              _this.commodityList = data.map.info;
+            } else {
+              _this.commodityList = _this.commodityList.concat(data.map.info);
+            }
+            if (_this.page >= _this.totalPage) {
+              _this.finished = true;
+            }
+            _this.page = _this.page + 1;
+          }
+        });
+      },
+      onLoad () {
+        const _this = this;
+        setTimeout(() => {
+          _this.getCommodities();
+        }, 500);
+      },
       onPlayerPlay(player) {
       },
       onPlayerPause(player) {
@@ -116,6 +197,18 @@
 
 <style scoped lang="scss">
 .home{
-
+  .type{
+    .flex1{
+      text-align: center;
+    }
+    img{
+      width:45px;
+      height:45px;
+      margin-bottom: 5px;
+    }
+  }
+  .no-more{
+    margin-bottom: 50px;
+  }
 }
 </style>

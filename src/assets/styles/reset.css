@@ -12,6 +12,7 @@ body {
   font: 14px/1.5 'Microsoft YaHei','宋体', Tahoma, Arial, sans-serif;
   line-height: 1.5;
   color: #323233;
+  /*background-color: #f8f8f8;*/
   background-color: #f8f8f8;
   height: 100%;
   overflow-x: hidden;
