@@ -1,16 +1,16 @@
 <template>
     <section class="commodity-detail">
       <div class="commodity-top">
-        <van-swipe :autoplay="3000" class="comm-pics">
+        <van-swipe :autoplay="3000" class="comm-pics ly-card">
           <van-swipe-item v-for="(item, index) in commodity.pic" :key="index">
             <img :src="$urls.goodsDownload + item" />
           </van-swipe-item>
         </van-swipe>
-        <div class="commodity-info">
+        <div class="commodity-info ly-card-p10">
           <h2 class="commodity-title mb10 t1">{{commodity.name}}</h2>
           <div class="commodity-detail mb10 t2">{{commodity.description}}</div>
           <div class="commodity-row mb10 clearfix">
-            <span class="price">￥{{commodity.price}}</span>{{shame}}
+            <span class="price">￥{{commodity.price}}</span>
             <span class="sales t2">销量 {{commodity.sham + sales}} 笔</span>
           </div>
           <div class="mb10 sales t2">
@@ -21,19 +21,15 @@
           </div>
         </div>
       </div>
-      <div class="line"></div>
-     <!-- <div class="buy-info">
-        购买数量：{{buyNum}}
-      </div>-->
-      <div class="line"></div>
       <div class="commodity-pic-detail">
         <h2 class="pic-detail-title t1">- 图文详情 -</h2>
         <img :src="$urls.goodsDownload + item" v-for="(item,index) in commodity.descPic || []" :key="index" @click="toShowPic(item)">
       </div>
+      <div class="no-more"></div>
       <div class="operation">
         <van-goods-action>
-         <!-- <van-goods-action-mini-btn icon="chat" text="客服" @click="toCustomerService" />-->
-          <van-goods-action-mini-btn icon="cart" text="购物车" @click="toShopCart" />
+          <van-goods-action-mini-btn icon="chat-o" text="客服" @click="toCustomerService" />
+          <van-goods-action-mini-btn icon="cart-o" text="购物车" @click="toShopCart" />
           <van-button class="action-btn" type="warning" :disabled="sku.stock_num<=0" @click="addShopCart">加入购物车</van-button>
           <van-button class="action-btn" type="danger"  :disabled="sku.stock_num<=0" @click="toBuy">立即购买</van-button>
         </van-goods-action>
@@ -64,16 +60,19 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  import { Swipe, SwipeItem, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, Sku, Toast, Button, Popup } from 'vant';
-  Vue.use(Swipe).use(SwipeItem);
-  Vue.use(Toast);
-  Vue.use(Button);
-  Vue.use(Sku);
-  Vue.use(Popup);
-  Vue.use(GoodsAction).use(GoodsActionBigBtn).use(GoodsActionMiniBtn);
+  import { Swipe, SwipeItem, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, Sku, Button, Popup } from 'vant';
   export default {
     name: 'commodityDetail',
+    components: {
+      [Swipe.name]: Swipe,
+      [SwipeItem.name]: SwipeItem,
+      [Button.name]: Button,
+      [Sku.name]: Sku,
+      [Popup.name]: Popup,
+      [GoodsAction.name]: GoodsAction,
+      [GoodsActionBigBtn.name]: GoodsActionBigBtn,
+      [GoodsActionMiniBtn.name]: GoodsActionMiniBtn
+    },
     data () {
       return {
         showPic: false,
@@ -119,13 +118,13 @@
         this.showPic = true;
       },
       getCommodity (id) {
-        this.$toast.loading();
+        this.$toast.loadingMsg();
         let params = {
           ids: id
         };
         this.$store.dispatch('getCommodity', params).then((data) => {
           if (data.result) {
-            this.$toast.endLoading();
+            this.$toast.close();
             let commodity = data.map.info[0];
             let pics = commodity.pic.split(',');
             pics.shift();
@@ -191,12 +190,11 @@
       toCustomerService () {
         // eslint-disable-next-line
         // ysf.open();
-        // Toast('该功能暂未开放~');
         this.$toast.tip();
       },
       // 去购物车
       toShopCart () {
-        this.$router.push({ path: '/shopping/shopCart' });
+        this.$router.push({ path: '/mall/shopCart' });
       },
       // 加入购物车
       addShopCart () {
@@ -240,7 +238,7 @@
               specification: data.selectedSkuComb.id
             }
           ];
-          this.$router.push({ path: '/shopping/shopOrder', query: { info: params2, isShopCart: 0 } });
+          this.$router.push({ path: '/mall/shopOrder', query: { info: params2, isShopCart: 0 } });
         }
       },
       // 购买数量变化时触发

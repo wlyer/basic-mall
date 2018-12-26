@@ -55,7 +55,7 @@
           </van-col>
         </van-row>
       </van-list>
-      <div class="no-more" v-if="commodityList.length===0  || finished">没有更多数据哦~</div>
+      <div class="no-more" v-if="commodityList.length===0  || finished"></div>
     </div>
   </section>
 </template>
@@ -122,7 +122,7 @@
     },
     mounted () {
       let winHeight = document.documentElement.clientHeight; // 视口大小
-      document.getElementById('list-content').style.height = (winHeight - 46 * 2 - 250) + 'px'; // 调整上拉加载框高度
+      document.getElementById('list-content').style.height = (winHeight - 46 * 2 - 550) + 'px'; // 调整上拉加载框高度
     },
     methods: {
       resetParams () {
@@ -206,9 +206,6 @@
       height:45px;
       margin-bottom: 5px;
     }
-  }
-  .no-more{
-    margin-bottom: 50px;
   }
 }
 </style>

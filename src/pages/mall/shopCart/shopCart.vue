@@ -3,7 +3,7 @@
     <HeaderSlot>
       <span @click="isDel = !isDel">{{isDel ? '完成' : '管理'}}</span>
     </HeaderSlot>
-    <van-checkbox-group class="card-goods" v-model="checkedGoods">
+    <van-checkbox-group class="card-goods ly-card-p10" v-model="checkedGoods">
       <van-checkbox
         class="card-goods__item"
         v-for="item in goods"
@@ -98,12 +98,22 @@
 
 <style lang="scss" scoped>
   .shop-cart{
+    .van-submit-bar {
+      bottom: 50px;
+      border-bottom: 1px solid $my-line-color;
+    }
     .card-goods {
-      padding: 10px;
-      background-color: #fff;
+      .card-goods__item:last-child{
+        border: none;
+      }
       .card-goods__item {
         position: relative;
-        background-color: #fafafa;
+        background-color: #ffffff;
+        border-bottom: 1px solid $my-line-color;
+        padding: 10px 0;
+        .van-card{
+          background-color: #ffffff;
+        }
         .van-checkbox__label {
           width: 100%;
           height: auto; // temp

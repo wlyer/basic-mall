@@ -1,7 +1,7 @@
 <template>
   <section class="pay-success">
     <div class="status">
-      <img class="icon" src="../../assets/images/icon/pay_success.png">
+      <img class="icon" src="../../../assets/images/icon/pay_success.png">
       <!--<img class="icon" src="../../assets/images/icon/pay_error.png">-->
       <div class="">{{payStatus}}</div>
     </div>

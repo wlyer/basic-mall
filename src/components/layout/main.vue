@@ -53,10 +53,10 @@
           case '/home':
             this.menuActive = 0;
             break;
-          case '/honor':
+          case '/mall':
             this.menuActive = 1;
             break;
-          case '/study':
+          case '/myInfo':
             this.menuActive = 2;
             break;
           case '/aboutUs':

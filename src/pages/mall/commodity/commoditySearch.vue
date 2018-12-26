@@ -24,13 +24,12 @@
 
 <script>
   import ListCard from '@/components/listCard';
-  import { Search, List, Toast } from 'vant';
+  import { Search, List } from 'vant';
   export default {
     name: 'search',
     components: {
       [Search.name]: Search,
       [List.name]: List,
-      [Toast.name]: Toast,
       'v-list-card': ListCard
     },
     data () {

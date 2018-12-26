@@ -11,6 +11,7 @@ import routes from '@/router';
 import urls from '@/api/Host';
 import toast from '@/utils/toast';
 import utils from '@/utils/utils';
+import wechat from '@/utils/wechat';
 import '@/assets/styles/base_core.scss';
 import VeeValidate from 'vee-validate';
 import VideoPlayer from 'vue-video-player';
@@ -29,6 +30,7 @@ Vue.prototype.$urls = urls;
 Vue.prototype.$user = '';
 Vue.prototype.$utils = utils;
 Vue.prototype.$toast = toast;
+Vue.prototype.$wechat = wechat;
 let router = new VueRouter({ // 新建router 并传入routes
   mode: 'history', // 去除#号
   scrollBehavior (to, from, savedPosition) {

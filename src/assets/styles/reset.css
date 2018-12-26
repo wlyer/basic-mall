@@ -1,5 +1,6 @@
 html {
-  font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
+  font-family: 'PingFang SC', Helvetica, 'STHeiti STXihei', 'Microsoft YaHei', Tohoma, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
@@ -9,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  font: 14px/1.5 'Microsoft YaHei','宋体', Tahoma, Arial, sans-serif;
+  font: 14px/1.5 'PingFang SC', Helvetica, 'STHeiti STXihei', 'Microsoft YaHei', Tohoma, Arial, sans-serif;
   line-height: 1.5;
   color: #323233;
   /*background-color: #f8f8f8;*/

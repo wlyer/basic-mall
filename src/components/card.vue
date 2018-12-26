@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     toDetail (commodityId) {
-      this.$router.push({ path: '/shopping/commodityDetail', query: { id: commodityId } });
+      this.$router.push({ path: '/mall/commodityDetail', query: { id: commodityId } });
     }
   },
   computed: {

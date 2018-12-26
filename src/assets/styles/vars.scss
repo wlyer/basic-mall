@@ -2,3 +2,20 @@ $my-line-color: #e8e8e8;
 $my-theme-color: #e63955;
 $my-link-color:#666666;
 $my-text-color: #323232;
+$my-max-font-size: 20px;
+@mixin ellpisis(){
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+//文字超出后以...显示 支持多行
+@mixin fn-ellpisis($line,$lineHeight) {
+  width: 100%;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  line-height: $lineHeight;//
+  height:$lineHeight * $line;///* 2行隐藏就两倍，三行隐藏就三倍*/
+}

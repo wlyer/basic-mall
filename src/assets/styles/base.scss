@@ -110,8 +110,12 @@ a:hover,.links:hover{
   padding: 10px;
 }
 .no-more{
-  height:40px;
-  line-height: 40px;
+  height:50px;
+  line-height: 50px;
   text-align: center;
   color: #ccc;
+  margin-bottom: 50px;
+}
+.no-more:before{
+  content: '已经到底啦~';
 }

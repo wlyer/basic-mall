@@ -49,7 +49,7 @@ let routers = [
     children: [
       { path: 'commodityDetail', component: CommodityDetail, name: '商品详情' },
       { path: 'commoditySearch', component: CommoditySearch, name: '商品检索' },
-      { path: 'addOrder', component: ShopOrder, name: '提交订单' },
+      { path: 'shopOrder', component: ShopOrder, name: '提交订单' },
       { path: 'shopCart', component: ShopCart, name: '购物车' }
     ]
   },
