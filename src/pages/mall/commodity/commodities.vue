@@ -9,7 +9,7 @@
         >
           <v-list-card :dataList="commodities"/>
         </van-list>
-        <div class="no-more" v-if="commodities.length===0  || finished">没有更多数据哦~</div>
+        <div class="no-more-data" v-if="commodities.length===0  || finished"></div>
       </div>
     </section>
 </template>

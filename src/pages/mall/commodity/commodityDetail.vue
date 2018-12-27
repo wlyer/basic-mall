@@ -226,7 +226,7 @@
             specification: data.selectedSkuComb.id
           };
           this.$store.dispatch('addShopCart', params);
-          this.$toast.tipMsg('成功加入购物车');
+          this.$toast.success('加入购物车');
           this.showBase = false;
         } else { // 点击立即购买，里面点击确定
           this.showBase = false;
@@ -238,7 +238,8 @@
               specification: data.selectedSkuComb.id
             }
           ];
-          this.$router.push({ path: '/mall/shopOrder', query: { info: params2, isShopCart: 0 } });
+          this.$store.dispatch('addOrderCommodities', params2);
+          this.$router.push({ path: '/mall/shopOrder', query: { isShopCart: 0 } });
         }
       },
       // 购买数量变化时触发

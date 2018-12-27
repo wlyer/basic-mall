@@ -109,7 +109,7 @@ a:hover,.links:hover{
   margin-bottom: 10px;
   padding: 10px;
 }
-.no-more{
+.no-more,.no-more-data{
   height:50px;
   line-height: 50px;
   text-align: center;
@@ -118,4 +118,10 @@ a:hover,.links:hover{
 }
 .no-more:before{
   content: '已经到底啦~';
+}
+.no-more-data:before{
+  content: '没有更多数据啦~';
+}
+.fn-text-2-30{
+  @include fn-ellpisis(2,30px)
 }

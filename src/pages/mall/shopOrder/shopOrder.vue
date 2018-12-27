@@ -1,18 +1,17 @@
 <template>
   <section class="shop-order">
     <!--收货地址-->
-    <div class="get-goods-address dbox ly-card-p10">
+    <div class="get-goods-address dbox" @click="toEditAddress">
       <van-icon name="location-o" class="address-icon"/>
       <div  class="address flex1">
         <div>姓名:{{addressInfo.name}}</div>
         <div>电话:{{addressInfo.tel}}</div>
-        <div>地址:{{addressInfo.address}}</div>
+        <div class="van-ellipsis">地址:{{addressInfo.address}}</div>
       </div>
-      <i class="iconfont arrow-icon">&#xe633;</i>
+      <van-icon name="arrow" class="address-icon"/>
     </div>
-    <div class="color-line"></div>
-    <div class="line"></div>
-    <div class="commodity-info">
+    <div class="color-line mb10"></div>
+    <div class="commodity-info ly-card-p10">
       <van-card
         v-for="(item,index) in commodities"
         :key="index"
@@ -25,30 +24,18 @@
         <div slot="tags" class="tags-type">
           {{item.type === 0 ? '普通商品' : '虚拟商品'}}
         </div>
-        <div slot="footer" class="deduction">
+       <!-- <div slot="footer" class="deduction">
          红包最多可抵扣: ￥{{$utils.cheng($utils.chu(item.deduction, 100), item.price)}}
-        </div>
+        </div>-->
       </van-card>
     </div>
-    <div class="line"></div>
-    <van-cell-group>
-      <van-cell clickable :title="`可抵扣金额 ：${orderForm.deductionMonry}`" >
-        <van-checkbox v-model="isFree" />
-      </van-cell>
-      <div class="line"></div>
-      <van-field
-        v-model="orderForm.description"
-        label="备注"
-        type="textarea"
-        placeholder="请输入备注"
-        rows="1"
-        autosize
-      />
-    </van-cell-group>
-    <div class="line"></div>
-    <div class="pay-way">
+    <!--<van-cell class="mb10" clickable :title="`可抵扣金额 ：${orderForm.deductionMonry}`" >
+      <van-checkbox v-model="isFree" />
+    </van-cell>-->
+    <div class="pay-way mb10">
       <van-radio-group v-model="payWay">
         <van-cell-group>
+          <van-cell title="支付方式" class="bb"></van-cell>
           <van-cell title="支付宝" clickable @click="payWay = '1'" v-if="!$wechat.isWechat()">
             <img class="icon-pay" src="../../../assets/images/icon/alipay.png" slot="icon"/>
             <van-radio name="1" />
@@ -59,8 +46,15 @@
           </van-cell>
         </van-cell-group>
       </van-radio-group>
-      <div class="line"></div>
     </div>
+    <van-field
+      v-model="orderForm.description"
+      label="备注"
+      type="textarea"
+      placeholder="请输入备注"
+      :rows="1"
+      autosize
+    />
     <van-submit-bar
       class="operation"
       :price="sumPrice"
@@ -91,7 +85,8 @@
     },
     computed: {
       ...mapGetters([
-        'addressInfo'
+        'addressInfo',
+        'orderCommodities'
       ]),
       // 价格计算统计
       sumPrice () {
@@ -123,7 +118,7 @@
       const { isShopCart } = this.$route.query;
       this.isShopCart = isShopCart;
       this.handleCommodity();
-      this.getWelfare();
+      // this.getWelfare();
       this.getAddressInfo();
     },
     methods: {
@@ -194,7 +189,10 @@
       },
       // 处理订单数据
       handleCommodity () {
-        const { info } = this.$route.query;
+        let info = this.orderCommodities;
+        if (info.length === 0) { // 没有商品
+          return;
+        }
         let ids = [];
         let nums = [];
         let specificationList = [];
@@ -309,6 +307,10 @@
           areaName: this.$user.sArea || ''
         };
         this.$store.dispatch('addAddressInfo', address);
+      },
+      // 去编辑地址页
+      toEditAddress () {
+        this.$router.push('/mall/editAddress');
       }
     },
     destroyed () {
@@ -320,19 +322,14 @@
     .get-goods-address{
       position: relative;
       line-height: 30px;
-      height: 150px;
+      height: 120px;
+      background-color: #FFFFFF;
+      padding: 10px;
       .address-icon{
-        line-height: 150px;
-      }
-      .arrow-icon{
-        width: 20px;
-        height: 20px;
-        position: absolute;
-        top:30px;
-        right:0;
+        line-height: 100px;
       }
       .address{
-        margin-left:40px;
+        margin:0 20px;
       }
     }
     .color-line{

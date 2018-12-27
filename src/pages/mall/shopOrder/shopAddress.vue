@@ -5,15 +5,13 @@
 */
 <template>
   <section class="shop-address">
-    <div v-if="showAddress">
-      <van-address-edit
-        :area-list="areaList"
-        :address-info="addressInfo"
-        show-set-default
-        @save="onSave"
-        @change-area="changeArea"
-      />
-    </div>
+    <van-address-edit
+      :area-list="areaList"
+      :address-info="addressInfo"
+      show-set-default
+      @save="onSave"
+      @change-area="changeArea"
+    />
   </section>
 </template>
 

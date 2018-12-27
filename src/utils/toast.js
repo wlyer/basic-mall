@@ -18,7 +18,10 @@ export default {
       message: msg
     });
   },
-  error (msg) {
+  success (msg = '成功') {
+    Toast.success(msg);
+  },
+  error (msg = '失败') {
     Toast.fail(msg);
   },
   countDownLoadding (msg = '加载中', time = 10) {
