@@ -6,7 +6,7 @@
         <span v-if="data.isVip" class="study-commodity">学</span>
       </div>
       <div class="p10">
-        <div class="title">{{data.name}}</div>
+        <div class="title fn-text-2-50 mb10">{{data.name}}</div>
         <div class="price">￥{{data.price}}</div>
       </div>
     </div>
@@ -57,17 +57,6 @@ export default {
         height: 100%;
         border-radius: 5px 5px 0 0;
       }
-    }
-    .title{
-      width: 100%;
-      overflow : hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      line-height: 15px;//
-      height:30px;///* 2行隐藏就两倍，三行隐藏就三倍*/
-      margin-bottom: 5px;
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
     <section class="commodity-detail">
       <div class="commodity-top">
-        <van-swipe :autoplay="3000" class="comm-pics ly-card">
+        <van-swipe :autoplay="3000" class="banner">
           <van-swipe-item v-for="(item, index) in commodity.pic" :key="index">
             <img :src="$urls.goodsDownload + item" />
           </van-swipe-item>
@@ -253,13 +253,6 @@
 <style scoped lang="scss">
 .commodity-detail{
   .commodity-top{
-    .comm-pics{
-      height:250px;
-      img{
-        width: 100%;
-        height:100%;
-      }
-    }
     .commodity-info{
       padding: 10px;
       .price{

@@ -20,19 +20,19 @@
     </van-swipe>
     <div class="type dbox ly-card-p10">
       <div class="flex1" @click="toHot">
-        <img src="../assets/images/icon/icon_1.png"/>
+        <img class="ly-icon mb10" src="../assets/images/icon/icon_1.png"/>
         <div>热销</div>
       </div>
       <div class="flex1" @click="toNew">
-        <img src="../assets/images/icon/icon_5.png"/>
+        <img class="ly-icon mb10" src="../assets/images/icon/icon_5.png"/>
         <div>新品</div>
       </div>
       <div class="flex1" @click="toCheap">
-        <img src="../assets/images/icon/icon_6.png"/>
+        <img class="ly-icon mb10" src="../assets/images/icon/icon_6.png"/>
         <div>折扣</div>
       </div>
       <div class="flex1" @click="toType">
-        <img src="../assets/images/icon/icon_7.png"/>
+        <img class="ly-icon mb10" src="../assets/images/icon/icon_7.png"/>
         <div>分类</div>
       </div>
     </div>
@@ -200,11 +200,6 @@
   .type{
     .flex1{
       text-align: center;
-    }
-    img{
-      width:45px;
-      height:45px;
-      margin-bottom: 5px;
     }
   }
 }

@@ -73,6 +73,6 @@
 
 <style scoped lang="scss">
 .main{
-
+  height: 100%;
 }
 </style>

@@ -122,6 +122,10 @@ a:hover,.links:hover{
 .no-more-data:before{
   content: '没有更多数据啦~';
 }
-.fn-text-2-30{
-  @include fn-ellpisis(2,30px)
+.fn-text-2-50{
+  @include fn-ellpisis(2,50px)
+}
+.price{
+  font-weight: bold;
+  color: $my-theme-color;
 }

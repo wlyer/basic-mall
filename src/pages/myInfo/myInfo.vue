@@ -91,7 +91,7 @@
     display: block;
   }
   .user-group{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   .user-links{
     padding: 15px 0;

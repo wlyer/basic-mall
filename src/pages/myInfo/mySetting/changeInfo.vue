@@ -143,7 +143,6 @@
 
 <script>
   import areaList from '@/utils/area';
-  import validator from '@/utils/validator.js';
   import { Cell, CellGroup, Field, Area, Uploader, Popup, Button, Picker } from 'vant';
   export default {
     name: 'changeInfo',
@@ -159,6 +158,7 @@
     },
     data () {
       return {
+        validator: null,
         imgUrl: '',
         url: this.$urls.Host + `daliweb/user/fileUpload`,
         areaList: areaList,
@@ -190,42 +190,17 @@
         },
         rules: {
           userName: [
-            { required: true, message: '请输入姓名' }
+            { required: true, message: '请输入姓名', trigger: 'blur' }
           ],
           area: [
-            { required: true, message: '请选择所属地区' }
+            { required: true, message: '请选择所属地区', trigger: 'blur' }
           ],
           idCard: [
-            {
-              validator: (rule, value, callback) => {
-                /* eslint-disable */
-                if (value === '' || value === null || value === undefined ){
-                  callback();
-                  return;
-                }
-                if (/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)) {
-                  callback();
-                } else {
-                  callback('请输入正确的身份证号');
-                }
-                /* eslint-enable */
-              }
-            }
+            { pattern: this.$regular.IDCard, message: this.$regular.IDCardMsg, trigger: 'blur' }
           ],
           phone: [
-            {
-              validator: (rule, value, callback) => {
-                /* eslint-disable */
-                if (value === '') {
-                  callback('请输入手机号');
-                }else if (/^[1][0-9]{10}$/.test(value)){
-                  callback();
-                } else {
-                  callback('请输入正确的手机号');
-                }
-                /* eslint-enable */
-              }
-            }
+            { required: true, message: '请输入手机号', trigger: 'blur' },
+            { pattern: this.$regular.phone, message: this.$regular.phoneMsg, trigger: 'blur' }
           ]
         }
       };
@@ -234,7 +209,7 @@
     },
     created () {
       this.userForm = Object.assign({}, this.$user, { sex: this.$user.sex === 0 ? '女' : '男' });
-      this.validator = validator(this.rules, this.userForm);
+      this.validator = this.$validator.validatorConstruct(this.rules, this.userForm);
     },
     mounted () {
       this.area = (this.$user.postalCode && this.$user.postalCode.indexOf('-')) ? this.$user.postalCode.split('-')[2] : '';
@@ -290,7 +265,7 @@
         this.$refs.userPic.src = file.content;
       },
       changeInfo () {
-        this.validate((errors, fields) => {
+        this.$validator.validateForm(this.validator, this.errorMsg, (errors, fields) => {
           if (errors) {
             return;
           }
@@ -302,39 +277,13 @@
               };
               this.$store.dispatch('getUser', params1).then((data) => {
                 localStorage.setItem('user', JSON.stringify(data.map.info));
-                this.$router.push({ path: '/aboutUs/myInfo' });
+                this.$router.push({ path: '/myInfo/myInfo' });
               });
             } else {
               this.$toast.tipMsg('信息有误，修改失败哦');
             }
           });
         });
-      },
-      /**
-       * 清除验证提示
-       * @param attrs
-       */
-      resetField (attrs) {
-        attrs = !attrs ? Object.keys(this.errorMsg) : (Array.isArray(attrs) ? attrs : [attrs]);
-        attrs.forEach(attr => {
-          this.errorMsg[attr] = '';
-        });
-      },
-      /**
-       * 验证方法
-       * @param callback
-       * @param data
-       */
-      validate (callback, data) {
-        this.validator.validate((errors, fields) => {
-          this.resetField();
-          if (errors) {
-            fields.forEach(item => {
-              this.errorMsg[item.field] = item.message;
-            });
-          }
-          callback && callback(errors, fields);
-        }, data);
       }
     }
   };

@@ -4,6 +4,8 @@ $my-link-color:#666666;
 $my-text-color: #323232;
 $my-tiny-color: #999999;
 $my-max-font-size: 20px;
+$my-danger-color: #f44;
+$my-bg-color: #f8f8f8;
 @mixin ellpisis(){
   overflow:hidden;
   text-overflow:ellipsis;

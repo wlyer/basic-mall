@@ -33,7 +33,6 @@
 </template>
 
 <script>
-  import validator from '@/utils/validator.js';
   import { Cell, CellGroup, Button, Field } from 'vant';
   export default {
     name: 'changePsw',
@@ -44,7 +43,26 @@
       [Field.name]: Field
     },
     data () {
+      const checkPsw = (rule, value, callback) => {
+        /* eslint-disable */
+        if (value !== this.pswForm.reDlwPsw) {
+          callback('两次密码输入不一致');
+        } else {
+          callback();
+        }
+        /* eslint-enable */
+      };
+      const checkRePsw = (rule, value, callback) => {
+        /* eslint-disable */
+        if (this.pswForm.newDlwPsw !== value) {
+          callback('两次密码输入不一致');
+        } else {
+          callback();
+        }
+        /* eslint-enable */
+      };
       return {
+        validator: null,
         pswForm: {
           oldDlwPsw: '',
           newDlwPsw: '',
@@ -57,60 +75,24 @@
         },
         rules: {
           oldDlwPsw: [
-            {
-              validator: (rule, value, callback) => {
-                if (!value) {
-                  // eslint-disable-next-line
-                  callback('请输入密码');
-                } else if (value.length < 6) {
-                  // eslint-disable-next-line
-                  callback('请输入大于等于六位的登录密码');
-                } else {
-                  // eslint-disable-next-line
-                  callback();
-                }
-              }
-            }
+            { required: true, message: '请输入旧密码', trigger: 'blur' },
+            { min: 6, max: 18, message: '用户名长度为6-18', trigger: 'blur' }
           ],
           newDlwPsw: [
-            {
-              validator: (rule, value, callback) => {
-                /* eslint-disable */
-                if (!value) {
-                  callback('请输入密码');
-                } else if (value.length < 6) {
-                  callback('请输入大于等于六位的登录密码');
-                } else if (value !== this.pswForm.reDlwPsw) {
-                  callback('两次密码输入不一致');
-                } else {
-                  callback();
-                }
-                /* eslint-enable */
-              }
-            }
+            { required: true, message: '请输入新密码', trigger: 'blur' },
+            { min: 6, max: 18, message: '用户名长度为6-18', trigger: 'blur' },
+            { validator: checkPsw, trigger: 'blur' }
           ],
           reDlwPsw: [
-            {
-              validator: (rule, value, callback) => {
-                /* eslint-disable */
-                if (!value) {
-                  callback('请输入密码');
-                } else if (value.length < 6) {
-                  callback('请输入大于等于六位的确认密码');
-                } else if (this.pswForm.newDlwPsw !== value) {
-                  callback('两次密码输入不一致');
-                } else {
-                  callback();
-                }
-                /* eslint-enable */
-              }
-            }
+            { required: true, message: '请输入确认密码', trigger: 'blur' },
+            { min: 6, max: 18, message: '用户名长度为6-18', trigger: 'blur' },
+            { validator: checkRePsw, trigger: 'blur' }
           ]
         }
       };
     },
     created () {
-      this.validator = validator(this.rules, this.pswForm);
+      this.validator = this.$validator.validatorConstruct(this.rules, this.pswForm);
     },
     computed: {
     },
